@@ -30,7 +30,7 @@ vacation-planner-agent/
 └── static/                     ← index.html, style.css, app.js
 ```
 
-## Setup
+## Setup (local)
 ```bash
 pip install -r requirements.txt
 # Add all keys to .env (see .env.example)
@@ -38,6 +38,20 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 Then open `http://localhost:8000`.
+
+## Deployment (Google Cloud Run)
+Build and push the image, then deploy:
+```bash
+gcloud builds submit \
+  --tag us-central1-docker.pkg.dev/vacation-planner-agent/cloud-run-source-deploy/vacation-planner-agent:latest \
+  --region us-central1 .
+
+gcloud run deploy vacation-planner-agent \
+  --image us-central1-docker.pkg.dev/vacation-planner-agent/cloud-run-source-deploy/vacation-planner-agent:latest \
+  --platform managed --region us-central1 --allow-unauthenticated
+```
+Set env vars in Cloud Run console → Edit & Deploy New Revision → Variables & Secrets.
+Add the Cloud Run callback URL to authorized redirect URIs in Google Cloud Console → APIs & Services → Credentials.
 
 ## Environment Variables
 | Variable | Purpose |
