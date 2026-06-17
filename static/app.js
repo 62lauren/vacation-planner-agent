@@ -135,6 +135,7 @@ function resetUI() {
 
 function clearProgress() {
   $('progress-list').innerHTML = '';
+  seenTools.clear();
 }
 
 const seenTools = new Set();

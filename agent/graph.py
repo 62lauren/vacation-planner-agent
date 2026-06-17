@@ -62,6 +62,7 @@ async def build_graph(tools: list[BaseTool]):
 
         if response.tool_calls:
             new_tool_rounds = tool_rounds + 1
+            print(f"[plan_node] round {new_tool_rounds}: {len(response.tool_calls)} tool calls")
         else:
             # content can be a string or a list of blocks (Anthropic returns either)
             if isinstance(response.content, str):
@@ -75,13 +76,17 @@ async def build_graph(tools: list[BaseTool]):
             else:
                 text = ""
 
+            print(f"[plan_node] no tool calls, text length={len(text)}, starts_with={text[:80]!r}")
             try:
                 start = text.find("{")
                 end = text.rfind("}") + 1
                 if start != -1 and end > start:
                     plan_json = json.loads(text[start:end])
-            except json.JSONDecodeError:
-                pass
+                    print(f"[plan_node] plan_json parsed OK, keys={list(plan_json.keys())}")
+                else:
+                    print("[plan_node] no JSON braces found in text")
+            except json.JSONDecodeError as e:
+                print(f"[plan_node] JSON parse error: {e}")
 
         return {
             "messages": [response],
@@ -91,6 +96,7 @@ async def build_graph(tools: list[BaseTool]):
         }
 
     def approve_node(state: VacationState):
+        print(f"[approve_node] plan_approved={state.get('plan_approved')}, revision_feedback={state.get('revision_feedback')}, plan_json_none={state.get('plan_json') is None}")
         # Only interrupt when plan hasn't been decided yet
         if not state.get("plan_approved") and state.get("revision_feedback") is None:
             interrupt({"plan": state["plan_json"]})
