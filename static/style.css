@@ -1,0 +1,159 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #64748b;
+  --accent: #0ea5e9;
+  --success: #16a34a;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+
+header h1 { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+
+#auth-status { display: flex; align-items: center; gap: 0.75rem; }
+#auth-label { font-size: 0.85rem; color: var(--muted); }
+
+main {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+section h2 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text); }
+
+label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  resize: vertical;
+  font-family: inherit;
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+textarea:focus { outline: none; border-color: var(--accent); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+.btn-secondary { background: var(--border); color: var(--text); }
+.btn-secondary:hover:not(:disabled) { background: #cbd5e1; }
+
+#prompt-section { display: flex; flex-direction: column; gap: 0.75rem; }
+#plan-btn { align-self: flex-end; }
+
+/* Progress */
+#progress-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+#progress-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--muted); }
+#progress-list li.done { color: var(--success); }
+#progress-list li::before { content: "⟳"; }
+#progress-list li.done::before { content: "✓"; }
+
+/* Itinerary */
+#itinerary-title { font-size: 1.3rem; color: var(--primary); }
+
+.day-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.day-header {
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+}
+
+.activity-row {
+  display: grid;
+  grid-template-columns: 60px 28px 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+.activity-row:last-child { border-bottom: none; }
+
+.act-time { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.act-icon { font-size: 1rem; }
+.act-body { display: flex; flex-direction: column; }
+.act-name { font-weight: 600; font-size: 0.9rem; }
+.act-meta { font-size: 0.78rem; color: var(--muted); }
+.act-travel { font-size: 0.75rem; color: var(--accent); margin-top: 0.2rem; }
+
+#action-bar { display: flex; gap: 0.75rem; margin-top: 1rem; }
+
+#revise-section { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 100;
+  transition: opacity 0.3s;
+}
+#toast.error { background: #dc2626; }
+
+.hidden { display: none !important; }

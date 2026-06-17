@@ -1,0 +1,10 @@
+.env
+credentials.json
+token.json
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.DS_Store
+~/.vacation_planner_cache.json

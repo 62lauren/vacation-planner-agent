@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vacation Planner</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>&#127796; Vacation Planner</h1>
+    <div id="auth-status">
+      <span id="auth-label">Checking calendar...</span>
+      <a id="auth-btn" href="/api/auth/start" class="btn btn-secondary hidden">Connect Google Calendar</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="prompt-section">
+      <label for="prompt-input">Describe your ideal vacation:</label>
+      <textarea
+        id="prompt-input"
+        rows="4"
+        placeholder="E.g. 7-day beach trip to Costa Rica in mid-July, mix of adventure and relaxation, mid-range budget..."
+      ></textarea>
+      <button id="plan-btn" class="btn btn-primary">Plan My Vacation &#9992;&#65039;</button>
+    </section>
+
+    <section id="progress-section" class="hidden">
+      <h2>Planning your trip...</h2>
+      <ul id="progress-list"></ul>
+    </section>
+
+    <section id="itinerary-section" class="hidden">
+      <h2 id="itinerary-title">Your Itinerary</h2>
+      <div id="itinerary-body"></div>
+
+      <div id="action-bar">
+        <button id="approve-btn" class="btn btn-primary">&#9989; Approve &amp; Add to Calendar</button>
+        <button id="revise-btn" class="btn btn-secondary">&#9999;&#65039; Revise</button>
+      </div>
+
+      <div id="revise-section" class="hidden">
+        <textarea id="feedback-input" rows="3" placeholder="What would you like to change?"></textarea>
+        <button id="submit-revision-btn" class="btn btn-primary">Submit Revision</button>
+      </div>
+    </section>
+
+    <div id="toast" class="hidden"></div>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
