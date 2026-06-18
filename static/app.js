@@ -12,6 +12,8 @@ async function checkAuth() {
   const { authenticated } = await res.json();
   $('auth-label').textContent = authenticated ? '✓ Google Calendar connected' : 'Google Calendar not connected';
   $('auth-btn').classList.toggle('hidden', authenticated);
+  $('plan-btn').disabled = !authenticated;
+  $('auth-warning').classList.toggle('hidden', authenticated);
 }
 
 // ── Plan submission ───────────────────────────────────────────────────────────
@@ -19,6 +21,12 @@ async function checkAuth() {
 $('plan-btn').addEventListener('click', async () => {
   const prompt = $('prompt-input').value.trim();
   if (!prompt) return;
+  const authRes = await fetch('/api/auth/status');
+  const { authenticated } = await authRes.json();
+  if (!authenticated) {
+    showToast('Please connect your Google Calendar first!', true);
+    return;
+  }
   startPlanStream(prompt);
 });
 

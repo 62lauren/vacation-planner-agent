@@ -157,3 +157,5 @@ textarea:focus { outline: none; border-color: var(--accent); }
 #toast.error { background: #dc2626; }
 
 .hidden { display: none !important; }
+
+#auth-warning { color: #dc2626; font-size: 0.9rem; margin-top: 0.5rem; }
