@@ -158,4 +158,5 @@ textarea:focus { outline: none; border-color: var(--accent); }
 
 .hidden { display: none !important; }
 
-#auth-warning { color: #dc2626; font-size: 0.9rem; margin-top: 0.5rem; }
+#auth-warning { color: #be185d; font-size: 0.9rem; margin-top: 0.5rem; }
+#auth-note { font-size: 0.85rem; color: #be185d; margin-top: 0.5rem; max-width: 480px; }

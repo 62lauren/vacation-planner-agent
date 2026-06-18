@@ -12,6 +12,7 @@ async function checkAuth() {
   const { authenticated } = await res.json();
   $('auth-label').textContent = authenticated ? '✓ Google Calendar connected' : 'Google Calendar not connected';
   $('auth-btn').classList.toggle('hidden', authenticated);
+  $('auth-note').classList.toggle('hidden', authenticated);
   $('plan-btn').disabled = !authenticated;
   $('auth-warning').classList.toggle('hidden', authenticated);
 }
